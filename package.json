@@ -7,10 +7,16 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "eslint:comment": "使用eslint 检查并自动修复src目录下所有扩展名为.js 和 .vue的文件",
-    "eslint": "eslint --ext .js,.vue --ignore-path --fix src"
+    "eslint": "eslint --ext .js,.vue --ignore-path --fix src",
+    "prettier: comment": "自动化格式当前目录下的所有文件",
+    "prettier": "prettier --write"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "@vueuse/core": "^8.5.0",
+    "axios": "^0.27.2",
+    "pinia": "^2.0.14",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@types/node": "^17.0.33",
@@ -19,7 +25,9 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.7.1",
+    "less": "^4.1.2",
     "prettier": "^2.6.2",
+    "sass": "^1.51.0",
     "typescript": "^4.5.4",
     "vite": "^2.9.7",
     "vue-tsc": "^0.34.7"
