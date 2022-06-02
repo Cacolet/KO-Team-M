@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv, ConfigEnv, UserConfig } from 'vite'
+
 import vue from '@vitejs/plugin-vue'
 import * as path from "path"
 
@@ -7,7 +8,7 @@ export default defineConfig({
   resolve:{
     // 设置别名
     alias:{
-      '@':path.resolve(__dirname,'src')
+      '@':path.resolve(__dirname,'./src')
     }
   },
   plugins: [vue()],
@@ -20,7 +21,7 @@ export default defineConfig({
     // 设置https代理
     proxy:{
       'api':{
-        target:'your https address',
+        target:'https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0',
         changeOrigin:true,
         rewrite:(path:string) => path.replace(/^\/api/,'')
       }
