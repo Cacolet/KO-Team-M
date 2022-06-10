@@ -1,8 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import store from "@/store";
-import router from "@/router";
+import router from "@/routers";
 
+// reset css
+import "@/styles/reset.scss"
 // element plus
 import ElementPlus from "element-plus"
 // element icons

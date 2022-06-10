@@ -6,11 +6,11 @@ import Test from "@/pages/Test.vue"
 </script>
 
 <template>
-<!--  <RouterView/>-->
+  <RouterView/>
 <!--  <vue-use/>-->
 <!--  <demo-scss/>-->
 <!--  <demo-less/>-->
-  <Test />
+<!--  <Test />-->
 </template>
 
 <style>

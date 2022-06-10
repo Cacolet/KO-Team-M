@@ -1,0 +1,36 @@
+// * 请求枚举配置
+/**
+ * @description: 请求配置
+ * */
+export enum ResultEnum {
+    SUCCESS = 200,
+    ERROR = 500,
+    OVERDUE = 599,
+    TIMEOUT = 10000,
+    TYPE = "success"
+}
+
+/**
+ * @description: 请求方法
+ * */
+export enum RequestEnum {
+    GET = "get",
+    POST = "post",
+    PATCH = "patch",
+    PUT = "put",
+    DELETE = "delete"
+}
+
+/**
+ * @description: 常用的contentType类型
+ * */
+export enum ContentTypeEnum {
+    // json
+    JSON = "application/json;charset=utf-8",
+    // text
+    TEXT = "text/plain;charset=utf-8",
+    // form-data 一般配合qs
+    FORM_URLENCODED = "application/x-www-form-urlencoded;charset=UTF-8",
+    // form-data 上传
+    FORM_DATA = "multipart/form-data;charset=utf-8"
+}
