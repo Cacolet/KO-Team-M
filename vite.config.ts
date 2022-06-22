@@ -14,13 +14,14 @@ export default defineConfig({
     plugins: [vue()],
     server: {
         port: 8080,
+        open: true,
         hmr: {
             host: '127.0.0.1',
             port: 8080
         },
         // 设置https代理
         proxy: {
-            'api': {
+            '/api': {
                 // target:'https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0',
                 target: 'https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e',
                 changeOrigin: true,

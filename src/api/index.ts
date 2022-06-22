@@ -1,10 +1,11 @@
 import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
-// import { }
+import {showFullScreenLoading, tryHideFullScreenLoading} from "@/config/serviceLoading";
 import {AxiosCanceler} from "@/api/hleper/axiosCancel";
 import {GlobalStore} from "@/store";
 import {ResultEnum} from "@/enums/httpEnum";
 import {ResultData} from "@/api/interface";
 import router from "@/routers"
+import {checkStatus} from "@/api/hleper/checkStatus";
 import {ElMessage} from "element-plus";
 
 const globalStore = GlobalStore();
@@ -35,7 +36,7 @@ class RequestHttp {
             (config: AxiosRequestConfig) => {
                 // 将当前请求添加到opening中
                 axiosCanceler.addPending(config);
-                // showFullScreenLoading()
+                showFullScreenLoading()
                 const token: string = globalStore.token;
                 return {...config, headers: {"x-access-token": token}}
             },
@@ -53,7 +54,7 @@ class RequestHttp {
                 const {data, config} = response;
                 // * 在请求结束前 移除本次请求
                 axiosCanceler.removePending(config)
-                // tryHideFullScreenLoading()
+                tryHideFullScreenLoading()
                 // * 登录失败 (code == 599)
                 if (data.code == ResultEnum.OVERDUE) {
                     ElMessage.error(data.msg)
@@ -75,9 +76,9 @@ class RequestHttp {
             },
             async (error: AxiosError) => {
                 const {response} = error
-                // tryHideFullScreenLoading()
+                tryHideFullScreenLoading()
                 // 根据响应的错误状态码 做不同的处理
-                // if(response) return checkStatus(response.status)
+                if(response) return checkStatus(response.status)
                 // 服务器结果都没有返回(可能服务器错误可能客户端断网) 断网处理: 可以跳转到断网页面
                 if (!window.navigator.onLine) return router.replace({path: "/500"})
                 return Promise.reject(error)
@@ -90,7 +91,7 @@ class RequestHttp {
         return this.service.get(url, {params, ..._object})
     }
 
-    post<T>(url: string, params?: object, _object= {}): Promise<ResultData<T>> {
+    post<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
         return this.service.post(url, params, _object)
     }
 

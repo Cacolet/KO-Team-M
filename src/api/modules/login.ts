@@ -1,31 +1,21 @@
-import request from '@/utils/axios';
-import { Login } from "@/api/interface";
+import {Login} from "@/api/interface";
 import { PORT1 } from "@/api/config/servicePort"
 
-/*
-* 登录
-*
-* */
-
-interface IResponseType <P = {}>{
-    code?: number,
-    status: number,
-    msg: string,
-    data: P
+import http from "@/api"
+/**
+ * @name: 登录模块
+ * */
+// * 用户登录接口
+export const loginApi = (params: Login.ReqLoginForm) => {
+  return http.post<Login.ResLogin>(PORT1+'/login',params)
 }
 
-interface ILogin {
-    token: string,
-    expires: number
+// * 获取权限按钮
+export const getAuthButtons = () => {
+  return http.get<Login.ResAuthButtons>(PORT1+'/auth/buttons')
 }
 
-export const login = (username: string, password: string) => {
-    return request<IResponseType<ILogin>>({
-        url: 'api/auth/login',
-        method: 'post',
-        data: {
-            username,
-            password
-        }
-    })
+// * 获取菜单列表
+export const getMenuList = () => {
+  return http.get<Menu.MenuOptions[]>(PORT1+'/menu/list')
 }

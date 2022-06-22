@@ -1,5 +1,3 @@
-import {type} from "os";
-
 const toString = Object.prototype.toString
 
 /**
@@ -19,3 +17,12 @@ export function isFunction<T = Function>(val: unknown):val is T {
 /**
  * @description: 是否已定义
  * */
+
+
+
+/**
+ * @description: 是否为数组
+ * */
+export function isArray(val: any):val is Array<any> {
+    return val && Array.isArray(val)
+}

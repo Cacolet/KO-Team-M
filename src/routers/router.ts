@@ -2,10 +2,17 @@ import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 
 // 导入所有router
-//
+const metaRouters = import.meta.globEager("./modules/*.ts");
 
 // 处理导入的路由
+export const routerArray: RouteRecordRaw[] = [];
+Object.keys(metaRouters).forEach(item => {
+    Object.keys(metaRouters[item]).forEach((key: any) => {
+        routerArray.push(...metaRouters[item][key])
+    })
+})
 
+console.log(routerArray)
 
 const routes: RouteRecordRaw[] = [
     {
@@ -13,7 +20,7 @@ const routes: RouteRecordRaw[] = [
         redirect: { name: "login" }
     },
     {
-        path:"/",
+        path:"/login",
         name:"login",
         component: () => import("@/views/login/index.vue"),
         meta: {
@@ -22,6 +29,7 @@ const routes: RouteRecordRaw[] = [
             key: "login"
         }
     },
+    ...routerArray,
     {
         path: "/:pathMatch(.*)",
         redirect: {name: "404"}

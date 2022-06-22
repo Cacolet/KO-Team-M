@@ -1,6 +1,6 @@
 <template>
   <div class="login-container flx-center">
-
+<!--    全局皮肤颜色改变  -->
     <div class="login-box">
       <div class="login-left">
         <img src="@/assets/images/login_left.svg" alt="login">
