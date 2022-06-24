@@ -8,8 +8,17 @@ export default defineConfig({
     resolve: {
         // 设置别名
         alias: {
-            '@': path.resolve(__dirname, './src')
+            '@': path.resolve(__dirname, './src'),
+            "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
         }
+    },
+    // global css
+    css: {
+      preprocessorOptions:{
+          scss: {
+              additionalData: `@import "@/styles/var.scss";`
+          }
+      }
     },
     plugins: [vue()],
     server: {

@@ -8,7 +8,21 @@
       element-loading-svg-view-box="-10,-10,50,50"
       element-loading-background="rgba(122, 122, 122, 0.01)"
   >
-
+    <Logo />
+    <el-scrollbar>
+      <el-menu
+          :default-active="activeMenu"
+          :router="true"
+          :collapse="isCollapse"
+          :collapse-transition="false"
+          :unique-opened="true"
+          background-color="#191a20"
+          text-color="#dbdbc0"
+          active-text-color="#fff"
+      >
+        <SubItem :menuList="menuList"></SubItem>
+      </el-menu>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -19,8 +33,8 @@ import {MenuStore} from "@/store/modules/menu";
 import {AuthStore} from "@/store/modules/auth";
 import {getMenuList} from "@/api/modules/login";
 import {handleRouter} from "@/utils/utils";
-
-
+import Logo from "./components/Logo.vue";
+import SubItem from "./components/SubItem.vue"
 
 const loading = ref(false);
 
@@ -36,11 +50,35 @@ onMounted(async () => {
     if(!res.data) return;
     // 把路由菜单处理成一维数组存储到 pinia 中
     const dynamicRouter = handleRouter(res.data)
+    // console.log(dynamicRouter)
+    authStore.setAuthRouter(dynamicRouter);
+    menuStore.setMenuList(res.data)
   }finally {
     loading.value = false
   }
-})
+});
 
+const activeMenu = computed(() : string => route.path)
+const isCollapse = computed(() : boolean => menuStore.isCollapse)
+const menuList = computed(() : Menu.MenuOptions[] => menuStore.menuList)
+
+// aside 自适应
+const screenWidth = ref<number>(0)
+const screenHeight = ref<number>(0)
+
+// 监听窗口大小
+const listeningWindow = () => {
+  console.log(12334455)
+  window.onresize = () => {
+    return (() => {
+      screenWidth.value = document.body.clientWidth;
+      screenHeight.value = document.body.clientHeight;
+      if(isCollapse.value === false && screenWidth.value < 1200) menuStore.setCollapse()
+      if(isCollapse.value === true && screenWidth.value > 1200)  menuStore.setCollapse()
+    })();
+  }
+}
+listeningWindow()
 </script>
 
 <style scoped lang="scss">

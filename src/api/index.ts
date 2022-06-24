@@ -1,11 +1,11 @@
 import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
 import {showFullScreenLoading, tryHideFullScreenLoading} from "@/config/serviceLoading";
-import {AxiosCanceler} from "@/api/hleper/axiosCancel";
+import {AxiosCanceler} from "@/api/helper/axiosCancel";
 import {GlobalStore} from "@/store";
 import {ResultEnum} from "@/enums/httpEnum";
 import {ResultData} from "@/api/interface";
 import router from "@/routers"
-import {checkStatus} from "@/api/hleper/checkStatus";
+import {checkStatus} from "@/api/helper/checkStatus";
 import {ElMessage} from "element-plus";
 
 const globalStore = GlobalStore();
@@ -36,8 +36,10 @@ class RequestHttp {
             (config: AxiosRequestConfig) => {
                 // 将当前请求添加到opening中
                 axiosCanceler.addPending(config);
+
                 showFullScreenLoading()
                 const token: string = globalStore.token;
+                console.log(token)
                 return {...config, headers: {"x-access-token": token}}
             },
             (error: AxiosError) => {

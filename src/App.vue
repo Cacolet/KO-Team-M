@@ -13,5 +13,5 @@ import Test from "@/pages/Test.vue"
 <!--  <Test />-->
 </template>
 
-<style>
+<style lang="scss">
 </style>

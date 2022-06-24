@@ -5,6 +5,12 @@ import router from "@/routers";
 
 // reset css
 import "@/styles/reset.scss"
+// CSS common style sheet
+import "@/styles/common.scss";
+// custom element dark
+import "@/styles/element-dark.scss";
+// custom element css
+import "@/styles/element.scss";
 // element plus
 import ElementPlus from "element-plus"
 // element icons

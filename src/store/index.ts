@@ -34,7 +34,8 @@ export const GlobalStore = defineStore({
         setAssemblySize(assemblySize: string){
             this.assemblySize = assemblySize
         }
-    }
+    },
+    persist: piniaPersistConfig("GlobalState")
 })
 const pinia = createPinia();
 pinia.use(piniaPersist)
